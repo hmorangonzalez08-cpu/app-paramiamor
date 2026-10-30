@@ -313,3 +313,107 @@ button:hover, button:active {
     margin-bottom: 0;
     text-align: center;
 }
+
+/* --- PANTALLA DE BIENVENIDA ÉPICA --- */
+#welcome-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Tarjeta principal con efecto de profundidad */
+.welcome-card-epic {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    padding: 2.5rem 1.5rem;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(106, 5, 114, 0.2);
+    width: 100%;
+    z-index: 2;
+    animation: zoomInCard 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes zoomInCard {
+    from { opacity: 0; transform: scale(0.8) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.heart-glow-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    animation: heartbeatEpic 1.5s infinite ease-in-out;
+}
+
+@keyframes heartbeatEpic {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(255, 118, 117, 0.6)); }
+    50% { transform: scale(1.15); filter: drop-shadow(0 0 20px rgba(255, 118, 117, 0.9)); }
+}
+
+.welcome-card-epic h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.2rem;
+    color: var(--dark-purple);
+}
+
+.epic-subtitle {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: #d63031;
+    margin-bottom: 1rem !important;
+}
+
+.epic-text {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: 1.8rem;
+    color: #4a4a4a;
+}
+
+/* Botón con diseño ultra moderno */
+.btn-epic {
+    background: linear-gradient(135deg, #6a0572 0%, #a29bfe 50%, #ff7675 100%);
+    color: white !important;
+    border: none !important;
+    padding: 16px 28px;
+    border-radius: 35px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(106, 5, 114, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-epic:hover, .btn-epic:active {
+    transform: scale(1.04);
+    box-shadow: 0 12px 30px rgba(255, 118, 117, 0.5);
+}
+
+/* Fondo sutil con elementos decorativos */
+.falling-hearts-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    opacity: 0.25;
+    z-index: 1;
+    pointer-events: none;
+    font-size: 1.5rem;
+    animation: floatBg 6s infinite linear;
+}
+
+@keyframes floatBg {
+    0% { transform: translateY(-20px); }
+    50% { transform: translateY(20px); }
+    100% { transform: translateY(-20px); }
+}
