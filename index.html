@@ -13,12 +13,23 @@
 <body>
 
     <div id="app">
-        <!-- PANTALLA 1: BIENVENIDA -->
+        <!-- PANTALLA 1: BIENVENIDA (NIVEL DIOS) -->
         <div id="welcome-screen" class="screen active">
-            <h1>Hola, Morrr💘</h1>
-            <p>He preparado algo muy especial. No es solo una página web, es un pequeño rincón nuestro.</p>
-            <p>¿Estás lista para descubrirlo?</p>
-            <button onclick="goTo('menu-screen')">Entrar al menú</button>
+            <!-- Lluvia de corazones decorativos de fondo -->
+            <div class="falling-hearts-bg">
+                <span>💖</span><span>💜</span><span>✨</span><span>💖</span><span>💜</span><span>✨</span>
+            </div>
+            
+            <div class="welcome-card-epic">
+                <div class="heart-glow-icon">💖</div>
+                <h1>Para Morrr💘</h1>
+                <p class="epic-subtitle">Cinco meses maravillosos...</p>
+                <p class="epic-text">He programado este pequeño universo secreto solo para ti. Demuestra cuánto nos conocemos y descubre lo que tengo guardado.</p>
+                
+                <button class="btn-epic" onclick="goTo('menu-screen')">
+                    <span>🚀 Comenzar nuestra aventura</span>
+                </button>
+            </div>
         </div>
 
         <!-- PANTALLA 2: MENÚ PRINCIPAL -->
@@ -53,22 +64,22 @@
                     <div class="menu-text">Baúl</div>
                 </div>
 
-                <!--SOPPRESA BAÚL SOLO QUITAR LO COMENTADO Y COMENTAR DEL TODO LA OTRA PARTE PARA QUE SE DESBLOQUEEE¡
+                <!--SOPPRESA BAÚL SOLO QUITAR LO COMENTADO Y COMENTAR DEL TODO LA OTRA PARTE PARA QUE SE DESBLOQUEEE
                 <div class="menu-item" onclick="goTo('memory-screen')">
                     <div class="menu-icon">📸💖</div>
                     <div class="menu-text">Baúl</div>
                 </div>-->
                 
-                <!-- SORPRESA FINAL BLOQUEADA HASTA EL FINAL 
+                <!-- SORPRESA FINAL BLOQUEADA HASTA EL FINAL --> 
                 <div class="menu-item locked" onclick="alert('Aún no puedes entrar aquí. ¡Tienes que pasarte los juegos primero! 🎁')">
                     <div class="menu-icon">🔒🎬</div>
                     <div class="menu-text">Sorpresa Final</div>
-                </div> -->
-                <!-- SORPRESA FINAL DESBLOQUEADA SOLO QUITAR LOS COMENTARIOS PARA QUE SE ACTIVE -->
+                </div> 
+                <!-- SORPRESA FINAL DESBLOQUEADA SOLO QUITAR LOS COMENTARIOS PARA QUE SE ACTIVE 
                 <div class="menu-item" onclick="goTo('surprise-screen')">
                     <div class="menu-icon">🔒🎬</div>
                     <div class="menu-text">Sorpresa Final</div>
-                </div>
+                </div> -->
             </div>
         </div>
 
