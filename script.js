@@ -6,7 +6,359 @@ function goTo(screenId) {
     document.getElementById(screenId).classList.add('active');
 }
 
-// --- LÓGICA DEL TRES EN RAYA ---
+// --- MODO NOCHE ---
+function toggleNightMode() {
+    document.body.classList.toggle('night-mode');
+    const themeBtn = document.getElementById('theme-btn');
+    if (document.body.classList.contains('night-mode')) {
+        themeBtn.innerText = "☀️";
+    } else {
+        themeBtn.innerText = "🌙";
+    }
+}
+
+// --- CONFETI DE CORAZONES ---
+function launchConfetti() {
+    const container = document.getElementById("confetti-container");
+    const hearts = ["💖", "💜", "✨", "🌸", "💘"];
+    
+    for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti-heart");
+        confetti.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.animationDuration = Math.random() * 2 + 2 + "s";
+        container.appendChild(confetti);
+
+        setTimeout(() => { confetti.remove(); }, 4000);
+    }
+}
+
+// --- MÚSICA DE FONDO ---
+let isMusicPlaying = false;
+const musicAudio = document.getElementById("bg-music");
+const musicBtn = document.getElementById("music-btn");
+const musicIcon = document.getElementById("music-icon");
+
+function toggleMusic() {
+    if (isMusicPlaying) {
+        musicAudio.pause();
+        musicIcon.innerText = "🔇";
+        musicBtn.classList.remove("playing");
+    } else {
+        musicAudio.play();
+        musicIcon.innerText = "🎵";
+        musicBtn.classList.add("playing");
+    }
+    isMusicPlaying = !isMusicPlaying;
+}
+
+// --- CONTADOR DE TIEMPO (FECHA: 7 DE SEPTIEMBRE DE 2026) ---
+const startDate = new Date(2026, 8, 7, 0, 0, 0);
+
+function updateLoveCounter() {
+    const now = new Date();
+    const diff = now - startDate;
+
+    if (diff < 0) {
+        document.getElementById("love-counter").innerText = "¡Empezamos hoy! ❤️";
+        return;
+    }
+
+    const daysTotal = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const months = Math.floor(daysTotal / 30.44);
+    const days = Math.floor(daysTotal % 30.44);
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+    const counterElement = document.getElementById("love-counter");
+    if (counterElement) {
+        counterElement.innerText = `${months} meses, ${days} días, ${hours}h y ${minutes}m ✨`;
+    }
+}
+
+// --- 100 RAZONES POR LAS QUE TE AMO ---
+const razones = [
+    "1. Por cómo te ríes cuando te hago bromas tontas.", "2. Por la forma tan bonita en la que me miras.",
+    "3. Porque me haces querer ser mejor persona.", "4. Por tus abrazos que me curan cualquier mal día.",
+    "5. Por tu sonrisa, que ilumina cualquier lugar.", "6. Porque eres la mujer más hermosa que he visto.",
+    "7. Por lo bien que nos entendemos solo mirándonos.", "8. Por la paz tan grande que siento contigo.",
+    "9. Porque me encanta quedarme dormido a tu lado.", "10. Por cómo me buscas la mano por la calle.",
+    "11. Por tus caricias suaves en la cara.", "12. Por todos los 'te amo' sinceros que nos decimos.",
+    "13. Porque haces que los días lluviosos sean mágicos.", "14. Por tus besos con los que se me para el tiempo.",
+    "15. Porque eres mi confidente y mi mejor amiga.", "16. Por cómo defiendes lo que quieres con pasión.",
+    "17. Por tu voz dulce cuando tienes sueño.", "18. Porque a tu lado todo es divertido.",
+    "19. Por cómo me cuidas cuando estoy abrumado.", "20. Por los mensajes bonitos de la nada.",
+    "21. Porque eres única y no te cambiaría por nada.", "22. Por cómo se te frunce la cara al concentrarte.",
+    "23. Por las locuras espontáneas que inventamos.", "24. Porque me haces sentir el chico más afortunado.",
+    "25. Por tu olor que se me queda grabado.", "26. Por lo bien que te queda mi camiseta.",
+    "27. Porque contigo puedo ser yo mismo al 100%.", "28. Por el apoyo tan grande que me das siempre.",
+    "29. Por cómo me muerdes los labios suavemente.", "30. Porque juntos formamos un equipo invencible.",
+    "31. Por lo linda que estás nada más despertarte.", "32. Por cada detalle que tienes sin esperar nada.",
+    "33. Porque me encanta verte sonreír.", "34. Por el cosquilleo que siento cuando voy a verte.",
+    "35. Por nuestras charlas profundas de madrugada.", "36. Porque tienes un corazón de oro puro.",
+    "37. Por lo cariñosa y tierna que eres conmigo.", "38. Por lo sexy que te pones cuando nos arreglamos.",
+    "39. Porque no imagino mi futuro sin ti.", "40. Por la manera en la que me sostienes.",
+    "41. Por tus besos tiernos en la frente.", "42. Porque conviertes un domingo cualquiera en un planazo.",
+    "43. Por la ilusión con la que me cuentas tus cosas.", "44. Por cómo te enfadas de broma para que te mime.",
+    "45. Porque tus besos en el cuello me vuelven loco.", "46. Por cómo me escuchas con atención.",
+    "47. Porque me fascina tu forma de ver la vida.", "48. Por las risas y cosquillas infinitas.",
+    "49. Porque a tu lado el tiempo vuela.", "50. Por sacarme una sonrisa en los días difíciles.",
+    "51. Por tus miradas pícaras impredecibles.", "52. Porque eres mi lugar seguro.",
+    "53. Por cada paseo largo de la mano.", "54. Por lo bien que me sienta escucharte.",
+    "55. Por tu valentía y tu gran fuerza.", "56. Porque amo ver tu carcajada franca.",
+    "57. Por lo bien que encajan nuestras manos.", "58. Por tu lado divertido y gamberro.",
+    "59. Porque me enamoras cada día más.", "60. Por tus roces disimulados que me aceleran.",
+    "61. Por el brillo especial de tus ojos.", "62. Por nuestras bromas que solo entiendes tú.",
+    "63. Porque contigo el silencio es cómodo.", "64. Por cómo me abrazas por la espalda.",
+    "65. Por la forma tan dulce de decir mi nombre.", "66. Porque eres la mejor compañera de viajes.",
+    "67. Por los besos sorpresa en cualquier sitio.", "68. Por la infinita paciencia que me tienes.",
+    "69. Por pillarme mirándote como un tonto.", "70. Por la pasión con la que nos queremos.",
+    "71. Por lo hermosa que sonríes con flores.", "72. Por la entrega que le pones a todo.",
+    "73. Por cómo te acurrucas en mi pecho.", "74. Por estar preciosa aun estando despeinada.",
+    "75. Porque me das la fuerza que me falta.", "76. Por calmar mi mente cuando me estreso.",
+    "77. Por tu sinceridad sin filtros.", "78. Porque aprendo contigo cada día.",
+    "79. Por el flow único que tienes al bailar.", "80. Por tu lado ultra romántico.",
+    "81. Por tus comentarios que me hacen reír.", "82. Porque me haces sentir muy amado.",
+    "83. Por las ganas constantes de abrazarte.", "84. Por lo leal que eres con los tuyos.",
+    "85. Porque tus labios son mi refugio.", "86. Por construir esta historia paso a paso.",
+    "87. Por hacer que me duela la tripa de reír.", "88. Porque traes pura magia a mi vida.",
+    "89. Por tus abrazos fuertes de la nada.", "90. Por leerme la mente sin hablar.",
+    "91. Porque vivir esto contigo es un regalo.", "92. Por lo sexy que eres en cualquier momento.",
+    "93. Por la química brutal que nos conecta.", "94. Por sacarme sonrisas mirando al móvil.",
+    "95. Por tu bondad y gran corazón.", "96. Por la complicidad tan bonita de estos meses.",
+    "97. Porque contigo descubrí el amor verdadero.", "98. Por todo lo increíble que nos espera.",
+    "99. Porque sencillamente eres Victoria.", "100. Porque te amo con todo mi corazón. ❤️"
+];
+
+function getRandomReason() {
+    const display = document.getElementById("reason-display");
+    const randomReason = razones[Math.floor(Math.random() * razones.length)];
+    display.innerHTML = `<p style="font-size: 1.2rem; font-weight: bold; color: var(--dark-purple);">${randomReason}</p>`;
+    launchConfetti();
+}
+
+// --- 100 CITAS A CIEGAS + 100 CUPONES CANJEABLES (200 OPCIONES) ---
+const planesCitas = [
+    "🍕 Noche de pizza casera, pijama y maratón de películas.",
+    "🍷 Cena romántica a la luz de las velas (cocino yo).",
+    "🌅 Ir a ver el atardecer a un sitio bonito con nuestra música.",
+    "💆‍♀️ Sesión VIP de masajes con música relajante.",
+    "🍿 Noche de cine con palomitas, chuches y besos.",
+    "🛣️ Escapada improvisada en coche a un sitio cercano.",
+    "🍦 Paseo nocturno tomándonos un helado.",
+    "🍳 Desayuno especial preparado en la cama un domingo.",
+    "🎳 Tarde de juegos para ver quién paga las cañas.",
+    "🧺 Picnic romántico al aire libre en un parque.",
+    "🛋️ Tarde entera de mimos, abrazos y siesta infinita.",
+    "🍹 Noche de cócteles y vestirnos elegantes para salir.",
+    "🛍️ Tarde de compras donde yo llevo las bolsas.",
+    "☕ Ir a una cafetería bonita a charlar horas.",
+    "🎶 Escuchar nuestro disco favorito a oscuras tumbados.",
+    "🌙 Noche de miradas a las estrellas alejados de la ciudad.",
+    "🚗 Cita en el coche hablando de todo con la música bajita.",
+    "🎲 Noche de juegos de mesa en casa con premios picantes.",
+    "📸 Maratón de hacernos fotos divertidas en la calle.",
+    "🥞 Preparar tortitas juntos para merendar.",
+    "🏰 Visitar un pueblo o rincón histórico que no conozcamos.",
+    "🥐 Comprar churros o cruasanes calentitos recién hechos.",
+    "🍔 Probar la mejor hamburguesa de la ciudad juntos.",
+    "🛁 Baño relajante con espumita y música chill.",
+    "🍫 Tarde de peli con manta y chocolate caliente.",
+    "🌲 Paseo por el campo o la montaña a respirar aire puro.",
+    "🚲 Alquilar bicicletas o patinetes y hacer una ruta.",
+    "🎡 Ir a una feria o parque de atracciones a subir a todo.",
+    "🎳 Tarde de recreativos a jugar a las maquinitas.",
+    "🍣 Pedir comida a domicilio y comer en el suelo del salón.",
+    "🌮 Noche temática de comida mexicana en casa.",
+    "🍨 Ir a probar un postre gigante a una merienda.",
+    "🏙️ Ir a un mirador alto a ver las luces de la ciudad.",
+    "🎶 Cantar a pleno pulmón nuestras canciones en el coche.",
+    "🛋️ Construir un fuerte de mantas en el salón como niños.",
+    "🍷 Salir a tomar unos vinos o cañas por una zona bonita.",
+    "🖼️ Visitar una exposición o museo curioso juntos.",
+    "🎁 Ir a una tienda y comprarnos un detalle secreto.",
+    "🍕 Hacer pizza desde cero amasándola nosotros.",
+    "📖 Leernos cuentos o cartas bonitas a la luz de la vela.",
+    "🍿 Ver una peli de miedo para tener excusa de abrazarnos.",
+    "🍓 Comprar fresas con chocolate y comérnoslas a besos.",
+    "💃 Bailar una canción lenta pegados en medio del salón.",
+    "🌭 Cita de comida rápida improvisada a altas horas.",
+    "🌅 Ver amanecer juntos tras una noche hablando.",
+    "🥐 Salir a desayunar pronto un día de diario juntos.",
+    "🎯 Ir a tirar dardos o jugar al billar.",
+    "🍹 Inventar un cóctel propio con nuestro nombre.",
+    "🛋️ Tarde de mimos viendo nuestras fotos desde que nos conocemos.",
+    "💌 Escribirnos una carta rápida de 5 minutos y leerla en alto.",
+    "🍦 Cita de ir probando helados de sabores raros.",
+    "🛏️ Quedarnos todo el día en pijama sin mirar el reloj.",
+    "🍕 Salir a cenar a un sitio que elijas tú al 100%.",
+    "🥐 Ir a por pan dulce recien horneado para desayunar.",
+    "🚗 Ruta en coche sin destino fijo doblando esquinas al azar.",
+    "🍿 Noche de saga completa de pelis con snacks infinitos.",
+    "☕ Tarde de café helado y charla en una terraza.",
+    "🎶 Crear una playlist conjunta entre los dos.",
+    "🍔 Probar un sitio nuevo que hayamos visto en Instagram.",
+    "🛋️ Masaje de pies y piernas cansadas tras un día largo.",
+    "🍹 Salir a tomar un mojito en una terraza chula.",
+    "🍓 Preparar un batido casero de frutas juntos.",
+    "🌌 Salir a ver la luna llena a un sitio tranquilo.",
+    "🥞 Hacer crepes dulces o salados en la cocina.",
+    "🛍️ Probarte ropa rara en una tienda y hacer fotos de risa.",
+    "🍿 Maratón de vuestro programa o serie favorita.",
+    "🚗 Cita en el autocine o ver una peli en el portátil en el coche.",
+    "☕ Cita de café para ponernos al día como si fuera la primera vez.",
+    "🍕 Cita de pizza fría al día siguiente para desayunar.",
+    "🍝 Cocinar pasta italiana casera escuchando música de fondo.",
+    "🍷 Probar un vino diferente que no hayamos tomado nunca.",
+    "🍩 Comprar una caja de donuts y comérnosla entera.",
+    "🛋️ Tumbarte en mi regazo mientras te acaricio el pelo.",
+    "🍫 Comer fondu de chocolate con trozos de fruta.",
+    "🌅 Subir a un sitio alto a ver caer la tarde.",
+    "🥐 Cita para buscar el mejor cruasán de la ciudad.",
+    "🍔 Cita de cenar hamburguesas chorreando queso.",
+    "🚗 Conducir de noche por la ciudad con las ventanas bajadas.",
+    "🍿 Noche de ver pelis infantiles o de nuestra infancia.",
+    "🛋️ Tarde de abrazos con música acústica suave.",
+    "🍓 Comprar fruta de temporada e inventar un postre.",
+    "🥞 Cita de tortitas con sirope hasta arriba.",
+    "🍕 Cita de pizza redonda cortada a trozos desiguales.",
+    "🍷 Cita de picoteo con queso y embutido en casa.",
+    "☕ Tarde de té helado o café en un sitio tranquilo.",
+    "🎶 Bailar en pijama por el salón sin vergüenza.",
+    "🍿 Ver una peli cursi y burlarnos con amor.",
+    "🛋️ Tumbarse a no hacer nada absolutamente juntos.",
+    "🚗 Ir a lavar el coche juntos y terminar mojados.",
+    "🥐 Comprar bollería recién hecha un sábado por la mañana.",
+    "🍔 Cita para ver cuál de los dos come más rápido.",
+    "🍷 Cita de copas tranquilas hablando de nuestros planes.",
+    "🍕 Cita de pizza con los bordes rellenos de queso.",
+    "🍿 Cita de palomitas saladas mezcladas con chocolate.",
+    "☕ Cita de café rápido antes de empezar el día.",
+    "🛋️ Hacer un refugio con cojines en la cama.",
+    "🍓 Cita de comer fresas a mordiscos compartidos.",
+    "🥞 Cita para cocinar waffles con helado por encima.",
+    "🍕 Cita de pizza cuadrada hecha en bandeja de horno.",
+    "❤️ Cita sorpresa organizada 100% por mí de principio a fin."
+];
+
+const cuponesVales = [
+    "🎟️ VALE POR: Un beso apasionado de 10 segundos en cualquier momento.",
+    "🎟️ VALE POR: Un masaje completo de 15 minutos en espalda o piernas.",
+    "🎟️ VALE POR: Tener la razón en una discusión sin rechistar.",
+    "🎟️ VALE POR: Elegir la película o serie que vamos a ver hoy.",
+    "🎟️ VALE POR: Que te prepare tu plato o postre favorito.",
+    "🎟️ VALE POR: Un abrazo gigante de 2 minutos sin soltarte.",
+    "🎟️ VALE POR: Salir a cenar a donde tú elijas hoy mismo.",
+    "🎟️ VALE POR: Un desayuno completo servido en la cama.",
+    "🎟️ VALE POR: Un perdón instantáneo por una pequeña metedura de pata.",
+    "🎟️ VALE POR: Una tarde entera de mimos y mimos sin parar.",
+    "🎟️ VALE POR: Que te haga la cama o te ayude en lo que necesites.",
+    "🎟️ VALE POR: Un ataque de besos sorpresa en la cara.",
+    "🎟️ VALE POR: Decidir el plan completo de este fin de semana.",
+    "🎟️ VALE POR: Un helado o dulce a tu elección pagado por mí.",
+    "🎟️ VALE POR: Apagar el móvil 2 horas para estar solo contigo.",
+    "🎟️ VALE POR: Un baile lento juntos en medio de la habitación.",
+    "🎟️ VALE POR: Que te susurre al oído algo muy sucio y picante.",
+    "🎟️ VALE POR: Un paseo romántico cogidos de la mano.",
+    "🎟️ VALE POR: Que te traiga una merienda sorpresa.",
+    "🎟️ VALE POR: 10 minutos de caricias intensas en el pelo.",
+    "🎟️ VALE POR: Un piropo sincero mirando fijo a los ojos.",
+    "🎟️ VALE POR: Elegir el tipo de comida que pedimos a domicilio.",
+    "🎟️ VALE POR: Que te haga cosquillas suaves en la espalda.",
+    "🎟️ VALE POR: Un beso húmedo en el cuello que te haga temblar.",
+    "🎟️ VALE POR: Escuchar una canción dedicada exclusivamente a ti.",
+    "🎟️ VALE POR: Una noche libre de cualquier preocupación o estrés.",
+    "🎟️ VALE POR: Un detalle tonto pero lindo traído de sorpresa.",
+    "🎟️ VALE POR: Un mordisquito suave en los labios cuando tú quieras.",
+    "🎟️ VALE POR: Que te lleve en brazos por la casa.",
+    "🎟️ VALE POR: Un masaje de pies cansados tras un día duro.",
+    "🎟️ VALE POR: Hacerte sonreír cuando estés de mal humor.",
+    "🎟️ VALE POR: Un 'Te amo' dicho al oído con la voz ronca.",
+    "🎟️ VALE POR: Tener el mando de la televisión toda la noche.",
+    "🎟️ VALE POR: Que cocine yo solito y lave los platos.",
+    "🎟️ VALE POR: Un beso sorpresa de película en la calle.",
+    "🎟️ VALE POR: Ponerme la ropa que a ti más te guste de mi armario.",
+    "🎟️ VALE POR: Un picnic rápido improvisado en el salón.",
+    "🎟️ VALE POR: Que te cuente un secreto que nunca le he dicho a nadie.",
+    "🎟️ VALE POR: Un baño o ducha juntos sin prisa.",
+    "🎟️ VALE POR: Que te haga cosquillitas para hacerte reír.",
+    "🎟️ VALE POR: Un masaje relajante con crema de buen olor.",
+    "🎟️ VALE POR: Cumplir un capricho tuyo durante el día de hoy.",
+    "🎟️ VALE POR: Un beso lento y dulce de 20 segundos.",
+    "🎟️ VALE POR: Una noche de juego picante donde tú pones las reglas.",
+    "🎟️ VALE POR: Que te lleve un café o té calentito a la mesa.",
+    "🎟️ VALE POR: Verte dormir un rato mientras te acaricio la mano.",
+    "🎟️ VALE POR: Que te diga 5 cosas que me encantan de tu físico.",
+    "🎟️ VALE POR: Que te diga 5 cosas que me encantan de tu forma de ser.",
+    "🎟️ VALE POR: Un paseo nocturno para ver las estrellas juntos.",
+    "🎟️ VALE POR: Una foto romántica de los dos subida a redes.",
+    "🎟️ VALE POR: Una sesión de mimos intensos en el sofá.",
+    "🎟️ VALE POR: Traerte una chuche o chocolate que te guste.",
+    "🎟️ VALE POR: Un beso juguetón en la nariz o la mejilla.",
+    "🎟️ VALE POR: Que te cante un trozo de canción al oído.",
+    "🎟️ VALE POR: Decidir qué comemos hoy sin discusiones.",
+    "🎟️ VALE POR: Un masaje express de hombros mientras estudias o trabajas.",
+    "🎟️ VALE POR: Ver una peli de tu género favorito.",
+    "🎟️ VALE POR: Que te rasque la espalda hasta que te quedes frita.",
+    "🎟️ VALE POR: Un abrazo súper apretado que te quite el aire.",
+    "🎟️ VALE POR: Que te compre tu bebida favorita.",
+    "🎟️ VALE POR: Un beso robado en un sitio público.",
+    "🎟️ VALE POR: Decidir la música que suena en el coche.",
+    "🎟️ VALE POR: Que te pida perdón con un postre delicioso.",
+    "🎟️ VALE POR: Una noche entera dormido abrazado a ti.",
+    "🎟️ VALE POR: Un guiño de ojo y una sonrisa picante a lo lejos.",
+    "🎟️ VALE POR: Que te prepare una taza de chocolate caliente.",
+    "🎟️ VALE POR: Un juego de miradas sin hablar durante 1 minuto.",
+    "🎟️ VALE POR: Que te lleve la manta si tienes frío.",
+    "🎟️ VALE POR: Un beso suave en cada párpado.",
+    "🎟️ VALE POR: Cumplir un reto que tú me pongas ahora mismo.",
+    "🎟️ VALE POR: Que te diga lo mucho que te amo frente a todos.",
+    "🎟️ VALE POR: Un masaje de manos súper relajante.",
+    "🎟️ VALE POR: Un piropo atrevido que te ponga roja.",
+    "🎟️ VALE POR: Una tarde libre para que descanses mientras me encargo de todo.",
+    "🎟️ VALE POR: Un ataque de cosquillas suave hasta que te rindas.",
+    "🎟️ VALE POR: Un beso picante rozando los labios muy despacio.",
+    "🎟️ VALE POR: Que te prepare una bolsa de agua caliente o manta.",
+    "🎟️ VALE POR: Una sesión de fotos juntos donde salgas perfecta.",
+    "🎟️ VALE POR: Un masaje en el cuero cabelludo.",
+    "🎟️ VALE POR: Que te diga qué pensé la primera vez que te vi.",
+    "🎟️ VALE POR: Un beso largo al despedirnos.",
+    "🎟️ VALE POR: Que te escuche desahogarte todo el tiempo que necesites.",
+    "🎟️ VALE POR: Un regalo sorpresa en los próximos días.",
+    "🎟️ VALE POR: Elegir qué snack comemos viendo la peli.",
+    "🎟️ VALE POR: Un paseo juntos sin mirar la hora.",
+    "🎟️ VALE POR: Acompañarte a donde tengas que ir sin poner pegas.",
+    "🎟️ VALE POR: Un beso místico en la palma de la mano.",
+    "🎟️ VALE POR: Que te cuente una anécdota divertida mía de pequeño.",
+    "🎟️ VALE POR: Un abrazo sorpresa de la nada.",
+    "🎟️ VALE POR: Que te prepare la cena completa.",
+    "🎟️ VALE POR: Un piropo en voz alta por la calle.",
+    "🎟️ VALE POR: Un beso en la barbilla y en la nariz.",
+    "🎟️ VALE POR: Ver el atardecer juntos en un banco.",
+    "🎟️ VALE POR: Que te agarre de la cintura y te pegue a mí.",
+    "🎟️ VALE POR: Un juego de acariciar la frente hasta que te duermas.",
+    "🎟️ VALE POR: Traerte tu comida preferida de sorpresa.",
+    "🎟️ VALE POR: Un beso cargado de mucho amor.",
+    "🎟️ VALE POR: Decir en voz alta: 'Tengo a la novia más guapa del mundo'.",
+    "🎟️ VALE POR: Un cupón comodín: ¡Tú pides lo que quieras y yo cumplo!"
+];
+
+function getRandomDatePlan() {
+    const display = document.getElementById("date-coupon-display");
+    const randomPlan = planesCitas[Math.floor(Math.random() * planesCitas.length)];
+    display.innerHTML = `<h3 style="color: #a29bfe; margin-bottom: 8px;">PLAN DE CITA 📍</h3><p style="font-size: 1.2rem; font-weight: bold; color: var(--dark-purple);">${randomPlan}</p>`;
+    launchConfetti();
+}
+
+function getRandomCoupon() {
+    const display = document.getElementById("date-coupon-display");
+    const randomCoupon = cuponesVales[Math.floor(Math.random() * cuponesVales.length)];
+    display.innerHTML = `<h3 style="color: #ff7675; margin-bottom: 8px;">CUPÓN CANJEABLE 🎟️</h3><p style="font-size: 1.2rem; font-weight: bold; color: var(--dark-purple);">${randomCoupon}</p>`;
+    launchConfetti();
+}
+
+// --- TRES EN RAYA ---
 let boardState = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "💜";
 let gameActive = true;
@@ -49,6 +401,7 @@ function checkWin() {
     if (roundWon) {
         statusElement.innerText = `¡Ha ganado ${currentPlayer}! 🥰`;
         gameActive = false;
+        launchConfetti();
         return;
     }
     if (!boardState.includes("")) {
@@ -68,70 +421,20 @@ function resetBoard() {
     createBoard();
 }
 
-// --- LÓGICA DEL TRIVIAL ---
-// AQUÍ PUEDES AÑADIR MÁS PREGUNTAS SI QUIERES
-// --- LÓGICA DEL TRIVIAL ---
+// --- TRIVIAL ---
 const questions = [
-    {
-        question: "¿Dónde fuimos la primera vez que quedamos a solas?",
-        options: ["Al casino", "A fotografiarnos", "Al lado de tu casita", "De fiesta"],
-        answer: 2
-    },
-    {
-        question: "¿Qué es lo primero que pensé cuando te vi?",
-        options: ["Que mujer tan perfecta", "Tan guapa y tan mia?", "Se me va a caer la baba", "Parece una borde de mierda"],
-        answer: 1
-    },  
-    {
-        question: "¿Qué es lo primero que te dije cuando te vi?",
-        options: ["Que guapa eres", "Creia que eras mas guapa", "Eres la mejor", "Me encanta tu sonrisa"],
-        answer: 1
-    },
-    {
-        question: "¿Quién de los dos suele tardar más tiempo en decidir qué plan hacer?",
-        options: ["Tú, tardas la vida entera", "Yo, que soy un indeciso", "Los dos a la vez", "Ninguno, ponemos la primera que vemos"],
-        answer: 0
-    },
-    {
-        question: "¿Cuál fue el regalo más especial o curioso que te he hecho hasta ahora?",
-        options: ["La camisetita", "El ramo de flores", "Una carta gigante", "Cualquier detalle porque te encanta todo"],
-        answer: 3
-    },
-    {
-        question: "Si tuviéramos que hacer un viaje improvisado ahora mismo, ¿a dónde iríamos?",
-        options: ["Nueva York", "Brasil", "Tokio", "Puerto Rico"],
-        answer: 1
-    },
-    {
-        question: "¿Qué canción es nuestra cancion?",
-        options: ["Aire - Lucho RK", "Gusta - Luar La L", "Contigo Na Más - Remix", "Vernos - Hira"],
-        answer: 0
-    },
-    {
-        question: "¿Cómo suelo llamarte más cariñosamente cuando estamos a solas?",
-        options: ["Mi niña", "Morrr", "Bebeee", "Todas las anteriores son correctas"],
-        answer: 3
-    },
-    {
-        question: "¿Cuál dirias que es mi plan favorito para un domingo perezoso de invierno?",
-        options: ["Quedarnos en la cama todo el día viendo pelis", "Salir de fiesta", "Hacer maratón de videojuegos", "Dormir acurrucados"],
-        answer: 0
-    },
-    {
-        question: "¿Quién se duerme antes de los dos en las llamadas nocturnas?",
-        options: ["Tú, te duermes enseguida", "Yo, que caigo frito", "Los dos a la vez", "Ninguno, aguantamos como campeones"],
-        answer: 1
-    },
-    {
-        question: "¿Qué es lo que más te repito siempre sobre lo guapa que eres?",
-        options: ["Que eres perfecta para mí", "Que no pienses mal de tu físico porque eres la más hermosa", "Que me tienes loco", "Todas son ciertas, ¡te lo digo siempre!"],
-        answer: 3
-    },
-    {
-        question: "¿Qué es lo que más me gusta en mis tiempos libres?",
-        options: ["Pasar tiempo de calidad contigo", "Jugar al ordenador", "Hacer deporte", "Follar contigo hasta que nos duela el cuerpo"],
-        answer: 0
-    }
+    { question: "¿Dónde fuimos la primera vez que quedamos a solas?", options: ["Al cine", "A tomar un café", "A dar un paseo por el parque", "A cenar"], answer: 2 },
+    { question: "¿Qué es lo primero que pensé cuando te vi?", options: ["¡Qué bajita es!", "Madre mía, qué guapa", "Se me va a caer la baba", "Qué buen rollo transmite"], answer: 1 },
+    { question: "¿Cuál es una de nuestras manías o costumbres más graciosas?", options: ["Dormir abrazados", "Mordernos o hacernos bromas constantes", "Ver pelis sin enterarnos", "Comer chuches a escondidas"], answer: 1 },
+    { question: "¿Quién suele tardar más tiempo en decidir qué peli ver?", options: ["Tú, tardas la vida entera", "Yo, que soy un indeciso", "Los dos a la vez", "Ninguno"], answer: 0 },
+    { question: "¿Cuál fue el regalo más especial que te he hecho?", options: ["La camisetita", "El ramo de flores", "Una carta gigante", "Cualquier detalle"], answer: 0 },
+    { question: "Si tuviéramos que hacer un viaje improvisado ahora, ¿a dónde iríamos?", options: ["A la playa", "A una cabaña perdida en la montaña", "A un parque de atracciones", "A Europa"], answer: 1 },
+    { question: "¿Qué canción nos pega más como 'nuestra canción'?", options: ["Una de reggaeton", "Aire de Lucho RK", "Una del Atleti", "La que suena de fondo"], answer: 1 },
+    { question: "¿Cómo suelo llamarte más cariñosamente a solas?", options: ["Mi niña", "Morrr", "Preciosa", "Todas las anteriores es correcta"], answer: 3 },
+    { question: "¿Nuestro plan favorito para un domingo perezoso?", options: ["Quedarnos en la cama todo el día viendo pelis", "Salir a tomar chocolate", "Hacer maratón de juegos", "Dormir acurrucados"], answer: 0 },
+    { question: "¿Quién cae rendido y se duerme antes viendo una serie?", options: ["Tú, te duermes enseguida", "Yo, que caigo frito", "Los dos a la vez", "Ninguno"], answer: 0 },
+    { question: "¿Qué es lo que más te repito sobre lo guapa que eres?", options: ["Que eres perfecta para mí", "Que no pienses mal de tu físico", "Que me tienes loco", "Todas son ciertas"], answer: 3 },
+    { question: "¿Qué fecha tan señalada estamos a punto de celebrar?", options: ["El 7 de noviembre", "Nuestro aniversario exacto", "El día que nos conocimos", "Nuestra primera escapada"], answer: 0 }
 ];
 let currentQuestion = 0;
 
@@ -140,6 +443,7 @@ function loadQuestion() {
     if (!container) return;
     if (currentQuestion >= questions.length) {
         container.innerHTML = "<h3>¡Has acertado todas! 🎉</h3><p>Estás un pasito más cerca de la sorpresa final...</p>";
+        launchConfetti();
         return;
     }
     const q = questions[currentQuestion];
@@ -160,212 +464,26 @@ function checkAnswer(selectedIndex, correctIndex) {
     }
 }
 
-// --- LÓGICA DE VERDAD O RETO (100 VERDADES Y 100 RETOS PICANTES) ---
-
+// --- VERDAD O RETO ---
 const verdades = [
-    "¿Cuál es tu parte favorita de mi cuerpo? 😏",
-    "¿En qué momento exacto te diste cuenta de que te gustaba?",
-    "¿Qué es lo más atrevido que has pensado hacer conmigo? 🔥",
-    "¿Qué ropa mía te gusta más cómo me queda?",
-    "Del 1 al 10, ¿cuánto de nervioso te pongo cuando te miro fijamente a los ojos?",
-    "¿Qué es lo primero que miras de mí cuando me cambio de ropa?",
-    "¿En qué lugar, que no sea una cama, te gustaría que nos liáramos? 🤫",
-    "¿Cuál es el mensaje o audio mío que más nerviosa te ha puesto?",
-    "Del 1 al 10, ¿cuántas ganas tenías de besarme en nuestra primera cita?",
-    "¿Qué es lo que hago sin darme cuenta que más te pone?",
-    "Si tuviéramos que pasar todo un fin de semana solos en una cabaña, ¿qué no podría faltar?",
-    "¿Alguna vez te has imaginado cómo seríamos viviendo juntos?",
-    "¿Qué parte de tu cuerpo te gustaría que besara más a menudo? 😈",
-    "¿Cuál es tu recuerdo más 'caliente' que tienes de nosotros dos?",
-    "Si esta noche solo pudieras tocarme con una mano, ¿dónde la pondrías?",
-    "¿Cuál crees que es tu mayor arma de seducción conmigo?",
-    "Si te concediera un deseo ahora mismo en esta habitación, ¿cuál sería? ✨",
-    "¿Qué fantasía inconfesable te gustaría cumplir conmigo?",
-    "¿Alguna vez has soñado algo erótico conmigo? Cuéntamelo con detalles.",
-    "¿Qué es lo que te enciende más rápido de mí?",
-    "¿Te gusta cuando te agarro fuerte de la cintura?",
-    "¿Cuál ha sido el sitio más prohibido o peligroso donde te has imaginado besándome?",
-    "Si te dijera que me quites la ropa con los dientes, ¿lo harías ahora mismo?",
-    "¿Qué tono de voz o susurro mío te hace temblar las piernas?",
-    "¿Prefieres los besos suaves y lentos o los salvajes y directos?",
-    "¿Qué es lo primero que te quita el sueño por las noches cuando piensas en mí?",
-    "Si tuvieras que describirme en la cama con una sola palabra, ¿cuál sería?",
-    "¿Te excita que te hable al oído con voz ronca?",
-    "¿Cuál es la zona de tu cuerpo donde eres más sensible a los besos?",
-    "¿Alguna vez te has tocado pensando en mí?",
-    "¿Qué prenda de ropa interior llevas puesta ahora mismo?",
-    "Si estuviéramos solos en un ascensor y se parara, ¿qué harías conmigo?",
-    "¿Qué es lo más loco que harías por pasar una noche entera a solas conmigo?",
-    "¿Te gusta cuando te miro los labios mientras hablas?",
-    "¿Qué parte de mis besos te hace perder el control?",
-    "¿Alguna vez has deseado que el tiempo se pare mientras nos estamos besando?",
-    "¿Qué prefieres: que te muerda los labios o el cuello?",
-    "¿Cuál es tu posición favorita para dormir abrazados?",
-    "¿Te pone nervioso o te gusta cuando te agarro del pelo?",
-    "¿Qué olor o perfume mío es el que más te vuelve loca?",
-    "¿Alguna vez has querido abalanzarte sobre mí en plena calle?",
-    "¿Qué te hace sentir más vulnerable cuando estamos a solas?",
-    "¿Te gusta cuando te doy órdenes de lo que tienes que hacer?",
-    "¿Cuál es tu mayor debilidad cuando estoy cerca de ti?",
-    "Si te pido que hagamos algo totalmente loco ahora mismo, ¿aceptarías?",
-    "¿Qué tipo de caricias te dan más escalofríos por la espalda?",
-    "¿Alguna vez te has mordido los labios pensando en un mensaje mío?",
-    "¿Qué es lo más romántico y a la vez picante que has hecho por amor?",
-    "¿Te gusta que te bese despacio recorriendo todo el cuerpo?",
-    "¿Cuál es la mirada que te pongo que más te desarma?",
-    "¿Te excita pensar en lo que vamos a hacer cuando estemos a solas este sábado?",
-    "¿Qué parte de mi cara te gusta más besar?",
-    "¿Alguna vez has fingido estar distraída solo para que me acerque más?",
-    "¿Qué te provoca cuando te cojo de la mano por la calle?",
-    "¿Te gusta que te susurre al oído lo mucho que te deseo?",
-    "¿Cuál es el piropo más atrevido que te gustaría que te dijera?",
-    "¿Te imaginas despertando a mi lado todas las mañanas?",
-    "¿Qué es lo que más te gusta de mi voz?",
-    "¿Alguna vez te has quedado sin respiración por un beso nuestro?",
-    "¿Qué prefieres, que te bese con intensidad o que te acaricie con calma?",
-    "¿Te gusta cuando te doy besos sorpresa cuando menos te lo esperas?",
-    "¿Cuál es el recuerdo más tierno y picante que guardas de los dos?",
-    "¿Te gustaría que probemos cosas nuevas y diferentes en la intimidad?",
-    "¿Qué es lo que más te acelera el ritmo cardíaco cuando estoy contigo?",
-    "¿Alguna vez has querido saltarte un plan solo para quedarte conmigo a solas?",
-    "¿Qué parte de mis brazos o manos te transmite más seguridad?",
-    "¿Te gusta cuando te abrazo por la espalda de la nada?",
-    "¿Cuál crees que es nuestro punto fuerte como pareja?",
-    "¿Te consideras una persona celosa cuando alguien me mira mucho?",
-    "¿Qué es lo que más te gusta que te haga en la oreja?",
-    "¿Alguna vez has sonreído como tonta al leer un mensaje mío en público?",
-    "¿Qué prefieres, una cena romántica a la luz de las velas o una noche loca en casa?",
-    "¿Te excita la idea de viajar juntos a un sitio totalmente aislado del mundo?",
-    "¿Qué es lo que más te gusta de cómo te miro?",
-    "¿Alguna vez has deseado que el día dure 48 horas solo para estar conmigo?",
-    "¿Qué tipo de besos son tus favoritos absolutos?",
-    "¿Te gusta cuando te piropeo de forma directa y sin filtros?",
-    "¿Cuál es el mayor secreto o pensamiento travieso que tienes sobre nosotros?",
-    "¿Te pone los pelos de punta cuando te rozo la piel sin querer?",
-    "¿Qué es lo que más te engancha de nuestra relación?",
-    "¿Alguna vez has querido parar el tiempo en medio de un beso?",
-    "¿Qué te hace sentir que estás completamente segura a mi lado?",
-    "¿Te gusta cuando te cojo en brazos de la nada?",
-    "¿Cuál es el mejor recuerdo que tienes de nuestros primeros besos?",
-    "¿Te excita pensar que ya queda muy poco para pedirte salir oficialmente?",
-    "¿Qué es lo que más te gusta de mi forma de ser contigo?",
-    "¿Alguna vez has perdido la noción del tiempo por estar hablando conmigo?",
-    "¿Qué prefieres, que te bese la frente o los labios?",
-    "¿Te gusta cuando nos quedamos en silencio mirándonos a los ojos sin decir nada?",
-    "¿Cuál es la locura más grande que harías por mí?",
-    "¿Te pone nerviosa cuando me pongo serio y te miro fijamente?",
-    "¿Qué es lo que más te gusta de nuestras conversaciones nocturnas?",
-    "¿Alguna vez has soñado desppierta con un momento nuestro?",
-    "¿Qué te hace suspirar cada vez que te acuerdas de mí?",
-    "¿Te gusta cuando te dedico canciones o palabras bonitas?",
-    "¿Cuál es tu mayor sueño romántico para nuestro futuro?",
-    "¿Te excita saber que esta página web la he hecho exclusivamente para ti?",
-    "¿Qué es lo que más te enamora de mí cada día que pasa?",
-    "¿Alguna vez has dudado de lo mucho que te adoro? *(Espero que la respuesta sea no)*",
-    "¿Estás preparada para todo lo que vamos a vivir juntos a partir del 7 de noviembre?"
+    "¿Cuál es tu parte favorita de mi cuerpo? 😏", "¿En qué momento exacto te diste cuenta de que te gustaba?",
+    "¿Qué es lo más atrevido que has pensado hacer conmigo? 🔥", "¿Qué ropa mía te gusta más cómo me queda?",
+    "Del 1 al 10, ¿cuánto de nervioso te pongo cuando te miro fijamente?", "¿Qué es lo primero que miras de mí cuando me cambio?",
+    "¿En qué lugar, que no sea una cama, te gustaría que nos liáramos? 🤫", "¿Cuál es el mensaje que más nerviosa te ha puesto?",
+    "Del 1 al 10, ¿cuántas ganas tenías de besarme en la primera cita?", "¿Qué hago sin darme cuenta que más te pone?",
+    "Si tuviéramos un finde solos en una cabaña, ¿qué no podría faltar?", "¿Te has imaginado cómo seríamos viviendo juntos?",
+    "¿Qué parte de tu cuerpo te gustaría que besara más a menudo? 😈", "¿Cuál es tu recuerdo más 'caliente' de los dos?",
+    "Si esta noche solo pudieras tocarme con una mano, ¿dónde la pondrías?", "¿Cuál crees que es tu mayor arma de seducción?",
+    "Si te concediera un deseo ahora mismo, ¿cuál sería? ✨", "¿Qué fantasía inconfesable te gustaría cumplir conmigo?"
 ];
 
 const retos = [
-    "Dame un beso apasionado de 10 segundos donde tú elijas. 🔥",
-    "Hazme un masaje en el cuello (o donde yo t pida) durante 2 minutos. 💆‍♀️",
-    "Susúrrame al oído la fantasía más secreta que tengas. 🤫",
-    "Tienes que darme besos por el cuello hasta que te diga que pares. 😈",
-    "Déjame que te dé un beso en tu zona más sensible (tú mandas).",
-    "Baila pegada a mí durante 30 segundos sin música.",
-    "Dame un beso de película de exactamente 15 segundos sin usar las manos.",
-    "Susúrrame al oído con voz muy sugerente qué quieres que pase esta noche.",
-    "Quítate una prenda de ropa (¡y yo también me quito otra!). 🥵",
-    "Déjame vendarte los ojos y adivina con qué parte de mi cuerpo te estoy rozando.",
-    "Hazme un chupetón o marca suave donde nadie más pueda verlo. 🧛‍♀️",
-    "Muerde mi labio inferior suavemente y no me sueltes durante 5 segundos.",
-    "Siéntate encima de mí para la próxima ronda del juego. 😏",
-    "Dame un beso en el cuello que baje lentamente hasta donde tú quieras.",
-    "Deja que desabroche tu pantalón o camiseta usando solo una mano.",
-    "Acércate a 1 milímetro de mis labios pero no me beses durante un minuto entero.",
-    "Pasa un cubito de hielo (o tus manos muy frías) por mi espalda o mi cuello. 🧊",
-    "Manda tu mano por debajo de mi camiseta y déjala ahí 2 minutos.",
-    "Hazme una marca con besos desde la mandíbula hasta la clavícula.",
-    "Mírame fijamente a los ojos sin reírte ni parpadear durante 45 segundos.",
-    "Pásame un caramelo o un cubito de hielo usando solo la boca.",
-    "Abrázame muy fuerte por la espalda y no me sueltes en 3 minutos mientras te hablo.",
-    "Quítate los calcetines (o los zapatos) usando únicamente los dientes de los dos...",
-    "Hazme cosquillas en la zona que menos me guste durante 30 segundos.",
-    "Túmbate boca arriba y déjame que te dibuje un corazón en la tripa con los dedos.",
-    "Susúrrame tres cosas muy sucias y atrevidas al oído derecho.",
-    "Muerde suavemente la parte blanda de mi oreja y respira hondo.",
-    "Hazme un striptease muy lento de una sola prenda al ritmo que yo marque.",
-    "Permíteme que te ate las manos con un pañuelo durante dos turnos seguidos.",
-    "Dame besos en la palma de la mano y en la muñeca lentamente.",
-    "Imita cómo gimes o cómo reaccionas cuando te doy un beso en el cuello.",
-    "Colócate de rodillas frente a mí y mírame hacia arriba con cara de traviesa.",
-    "Pásame la lengua despacio por el lóbulo de la oreja.",
-    "Deja que te acaricie la pierna subiendo poco a poco durante 1 minuto.",
-    "Dame un beso con tanta fuerza que nos quedemos sin aire.",
-    "Hazme una pregunta al oído con la voz más sensual que te salga.",
-    "Masajea mis manos y mis dedos con crema o aceite (o con las manos calientes).",
-    "Quédate en ropa interior durante los próximos 3 turnos de juego.",
-    "Muerde mi labio superior y luego bésame despacio.",
-    "Pon tus manos en mi nuca y acércame hacia ti con fuerza y ganas.",
-    "Hazme un recorrido de besos desde el hombro hasta el codo.",
-    "Susúrrame al oído qué es lo que más te gusta hacerme en la cama.",
-    "Déjame darte un beso en el cuello mientras te agarro firmemente de la cintura.",
-    "Haz una postura sugerente y aguántala durante 20 segundos para que te mire.",
-    "Pasa tu dedo índice lentamente por mis labios y luego por mi cuello.",
-    "Dame un beso húmedo y con mucha lengua, sin prisa.",
-    "Hazme caminar a ciegas por la habitación guiado solo de tu mano.",
-    "Rocíame con besos rápidos por toda la cara hasta que me rinda.",
-    "Abrázame tan fuerte y pegada que no quepa ni un alfiler entre los dos.",
-    "Hazme un masaje en los hombros mientras me dices lo mucho que me deseas.",
-    "Sostén mi barbilla con tu mano y mírame los labios durante 20 segundos.",
-    "Pásate un cubito de hielo por los labios y luego bésame.",
-    "Hazme una promesa picante que tengas que cumplir antes de que acabe el día.",
-    "Tápame los ojos y dame un beso sorpresa donde tú quieras.",
-    "Camina de forma muy sexy y provocativa hacia mí y abrázame.",
-    "Muerde mi oreja con la fuerza justa para hacerme temblar.",
-    "Permíteme que te quite una prenda de ropa superior con los ojos cerrados.",
-    "Haz que te susurre una fantasía y finge que te has quedado sin palabras.",
-    "Pásame los dedos por el pecho dibujando círculos imaginarios muy lentos.",
-    "Dame un beso apasionado de pie contra la pared.",
-    "Susúrrame al oído cuánto me echas de menos cuando no estamos juntos.",
-    "Hazme una llave de amor: abrázame por el cuello y no me dejes escapar.",
-    "Coloca tu cabeza en mi pecho para escuchar cómo late mi corazón acelerado por ti.",
-    "Pásame la yema de los dedos por los labios con total suavidad.",
-    "Mírame fijamente con cara de 'te necesito' durante medio minuto.",
-    "Hazme una reverencia y bésame la mano como si fuera un príncipe malvado.",
-    "Pásame los labios por la mejilla rozando apenas la piel muy despacio.",
-    "Dame un beso en la comisura de los labios y muerde ligeramente.",
-    "Hazme un masaje en la cabeza y el cuero cabelludo para relajarme (o ponerme nervioso).",
-    "Susúrrame cuál ha sido el momento del día en el que más has pensado en mí.",
-    "Quítate la camiseta o la sudadera y déjala a un lado.",
-    "Hazme un recorrido de besos por toda la espalda.",
-    "Muerde mi labio inferior y di en voz alta: 'Eres solo mío'.",
-    "Abrázame por delante cruzando los brazos alrededor de mi cuello con fuerza.",
-    "Pásame la lengua por los labios de forma sugerente mientras me miras.",
-    "Dame un beso largo, prohibido y con mucha pasión.",
-    "Hazme cosquillas en la zona de las costillas durante 15 segundos.",
-    "Permíteme que te bese el cuello por detrás por sorpresa.",
-    "Susúrrame algo prohibido que solo debamos saber nosotros dos.",
-    "Haz una postura de modelo sexy apoyada en la pared y guiñame un ojo.",
-    "Pásame las manos frías por la nuca de golpe para darme escalofríos.",
-    "Dame un beso intenso mientras te cojo en volandas.",
-    "Hazme un masaje en los pies o en las piernas durante 2 minutos.",
-    "Muerde suavemente el lóbulo de mi oreja izquierda.",
-    "Acércate a mi oído y dime con voz de misterio qué ganas tienes de que llegue el 7 de noviembre.",
-    "Pásame los dedos por el cuello imitando el recorrido de una pluma.",
-    "Dame tres besos rápidos en los labios y uno larguísimo en el cuello.",
-    "Hazme un pulso de manos: si pierdes, me debes un beso largo; si ganas, te doy dos.",
-    "Susúrrame qué es lo que más te gusta de mi físico de arriba a abajo.",
-    "Abrázame fuerte y déjame que te bese la frente con ternura infinita.",
-    "Pásame los labios por la punta de la nariz de broma y luego bésame bien.",
-    "Hazme un gesto obsceno pero adorable que solo entendamos nosotros.",
-    "Tápame los ojos con tus manos y adivina qué parte de mi cara te estoy tocando.",
-    "Muerde mi labio inferior con pasión y suéltame despacio.",
-    "Dame un beso de tornillo improvisado en medio de la habitación.",
-    "Hazme una caricia en la mejilla tan suave que parezca que no te toco.",
-    "Susúrrame al oído que me quieres más que a nada en este mundo.",
-    "Pásate los dedos por tus propios labios y luego tócalos en los míos.",
-    "Hazme una seña para que te acerque y bésame sin previo aviso.",
-    "¡Premio gordo! Elige la verdad o el reto que más te apetezca hacer de toda la lista, ¡tú mandas! 🔥"
+    "Dame un beso apasionado de 10 segundos donde tú elijas. 🔥", "Hazme un masaje en el cuello durante 2 minutos. 💆‍♀️",
+    "Susúrrame al oído la fantasía más secreta que tengas. 🤫", "Tienes que darme besos por el cuello hasta que te diga. 😈",
+    "Déjame que te dé un beso en tu zona más sensible.", "Baila pegada a mí durante 30 segundos sin música.",
+    "Dame un beso de película de 15 segundos sin usar las manos.", "Susúrrame al oído con voz sugerente qué quieres que pase.",
+    "Quítate una prenda de ropa (¡y yo me quito otra!). 🥵", "Déjame vendarte los ojos y adivina con qué te rozo.",
+    "Hazme un chupetón o marca suave donde nadie lo vea. 🧛‍♀️", "Muerde mi labio inferior suavemente 5 segundos."
 ];
 
 function playTruth() {
@@ -380,7 +498,7 @@ function playDare() {
     display.innerHTML = `<h3 style="color: #ff7675; margin-bottom: 10px;">RETO 😈</h3><p style="font-size: 1.2rem;">${randomDare}</p>`;
 }
 
-// --- LÓGICA DE LA CARTA SECRETA ---
+// --- CARTA SECRETA ---
 let heartTaps = 0;
 const totalTapsNeeded = 10;
 
@@ -398,11 +516,12 @@ function tapHeart() {
             document.getElementById("heart-container").style.display = "none";
             document.getElementById("secret-letter").style.display = "block";
             alert("¡Carta desbloqueada! 💌");
+            launchConfetti();
         }, 300);
     }
 }
 
-// --- LÓGICA DEL MEMORY GAME ---
+// --- MEMORY GAME ---
 const emojisMemory = ["📸", "🍷", "🏖️", "🎡", "🍿", "🎁"];
 let memoryCards = [...emojisMemory, ...emojisMemory]; 
 let hasFlippedCard = false;
@@ -415,49 +534,39 @@ function initMemoryGame() {
     if (!board) return;
     board.innerHTML = "";
     matchedPairs = 0;
-    
     memoryCards.sort(() => 0.5 - Math.random());
 
     memoryCards.forEach((emoji) => {
         const card = document.createElement('div');
         card.classList.add('memory-card');
         card.dataset.framework = emoji;
-        
-        card.innerHTML = `
-            <div class="front">${emoji}</div>
-            <div class="back"></div>
-        `;
-        
+        card.innerHTML = `<div class="front">${emoji}</div><div class="back"></div>`;
         card.addEventListener('click', flipCard);
         board.appendChild(card);
     });
 }
 
 function flipCard() {
-    if (lockBoard) return;
-    if (this === firstCard) return;
-
+    if (lockBoard || this === firstCard) return;
     this.classList.add('flip');
-
     if (!hasFlippedCard) {
         hasFlippedCard = true;
         firstCard = this;
         return;
     }
-
     secondCard = this;
     checkForMatch();
 }
 
 function checkForMatch() {
     let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-
     if (isMatch) {
         disableCards();
         matchedPairs++;
         if (matchedPairs === 6) {
             setTimeout(() => {
                 alert("¡Completado! Baúl de recuerdos desbloqueado 🔓💖");
+                launchConfetti();
                 goTo('gallery-screen');
             }, 600);
         }
@@ -486,23 +595,25 @@ function resetBoardMemory() {
     [firstCard, secondCard] = [null, null];
 }
 
-// --- INICIALIZACIÓN GLOBAL ---
+// --- SORPRESA FINAL (DESBLOQUEO CON EL 4) ---
+function checkSecretCode() {
+    const userInput = document.getElementById("secret-code-input").value.trim().toLowerCase();
+    
+    if (userInput === "4" || userInput === "cuatro") {
+        alert("¡Código correcto, mi vida! Te amo 💘");
+        launchConfetti();
+        document.getElementById("lock-container").style.display = "none";
+        document.getElementById("video-reveal-container").style.display = "block";
+    } else {
+        alert("Pista: Piensa en cuántos meses llevamos compartiendo momentos increíbles 😉");
+    }
+}
+
+// --- CARGA INICIAL ---
 window.onload = () => {
     createBoard();
     loadQuestion();
     initMemoryGame();
+    updateLoveCounter();
+    setInterval(updateLoveCounter, 60000);
 };
-
-// --- LÓGICA DE LA SORPRESA FINAL ---
-function checkSecretCode() {
-    const userInput = document.getElementById("secret-code-input").value.trim().toLowerCase();
-    
-    // Puedes cambiar la respuesta correcta aquí abajo (ej: "5" o "cinco")
-    if (userInput === "5" || userInput === "cinco") {
-        alert("¡Contraseña correcta, mi amorrrr! Te amo mucho 💘");
-        document.getElementById("lock-container").style.display = "none";
-        document.getElementById("video-reveal-container").style.display = "block";
-    } else {
-        alert("Mmm...te estas equivocando, piénsalo bien 😉");
-    }
-}
