@@ -2,30 +2,33 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Para el amor de mi vida💘</title>
     
     <link rel="icon" href="favicon.png" type="image/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Enlace a tu archivo CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- CONTENEDOR DE CONFETI DE CORAZONES -->
-    <div id="confetti-container"></div>
 
     <div id="app">
-         <!-- REPRODUCTOR FLOTANTE DE MÚSICA -->
+        <!-- CONTENEDOR DE CONFETI (DENTRO DE APP PARA EVITAR DESPLAZAMIENTO) -->
+        <div id="confetti-container"></div>
+
+        <!-- REPRODUCTOR FLOTANTE Y MODO NOCHE -->
         <audio id="bg-music" loop>
             <source src="cancion.mp3" type="audio/mpeg">
         </audio>
-        <div id="music-btn" class="music-floating" onclick="toggleMusic()">
-            <span id="music-icon">🔇</span>
+        
+        <div class="top-controls">
+            <div id="theme-btn" class="control-btn" onclick="toggleNightMode()">🌙</div>
+            <div id="music-btn" class="control-btn" onclick="toggleMusic()">
+                <span id="music-icon">🔇</span>
+            </div>
         </div>
 
-        <!-- PANTALLA 1: BIENVENIDA (NIVEL DIOS) -->
+        <!-- PANTALLA 1: BIENVENIDA -->
         <div id="welcome-screen" class="screen active">
-            <!-- Lluvia de corazones decorativos de fondo -->
             <div class="falling-hearts-bg">
                 <span>💖</span><span>💜</span><span>✨</span><span>💖</span><span>💜</span><span>✨</span>
             </div>
@@ -34,7 +37,7 @@
                 <div class="heart-glow-icon">💖</div>
                 <h1>Para Morrr💘</h1>
                 <p class="epic-subtitle">Muchos momentos maravillosos...</p>
-                <p class="epic-text">He programado este pequeño universo secreto solo para ti. Demuestra cuánto nos conocemos y descubre lo que tengo guardado.</p>
+                <p class="epic-text">He programado este pequeño universo secreto solo para ti. Demuestra cuánto nos conoces y descubre lo que tengo guardado.</p>
                 
                 <button class="btn-epic" onclick="goTo('menu-screen')">
                     <span>🚀 Comenzar nuestra aventura</span>
@@ -46,11 +49,11 @@
         <div id="menu-screen" class="screen">
             <h2>Nuestro Rincón</h2>
 
-            <!-- CONTADOR DE TIEMPO JUNTOS -->
+            <!-- CONTADOR DE TIEMPO JUNTOS (ETIQUETA DIV CORREGIDA) -->
             <div class="time-counter-card">
                 <p class="counter-title">Llevamos volviéndonos locos... 💘</p>
                 <div id="love-counter">Cargando nuestro tiempo...</div>
-            </div
+            </div>
 
             <p>¿Qué te atreves a hacer primero?</p>
             
@@ -80,14 +83,13 @@
                     <div class="menu-text">100 Razones</div>
                 </div>
                 
-                <!-- 6ª APP: CITAS & CUPONES -->
                 <div class="menu-item" onclick="goTo('dates-screen')">
                     <div class="menu-icon">🎟️✨</div>
                     <div class="menu-text">Citas & Cupones</div>
                 </div>
 
-                <!-- BOTÓN DEL BAÚL (Sin Activar) -->
-                 <div class="menu-item locked" onclick="alert('Aún no puedes entrar aquí atrevida. ¡Primero juega un poquito a todos los juegos! 🎁')">
+                <!-- BOTÓN DEL BAÚL -->
+                <div class="menu-item locked" onclick="alert('Aún no puedes entrar aquí atrevida. ¡Primero juega un poquito a todos los juegos! 🎁')">
                     <div class="menu-icon">📸💖</div>
                     <div class="menu-text">Baúl</div>
                 </div> 
@@ -96,17 +98,18 @@
                 <div class="menu-item" onclick="goTo('memory-screen')">
                     <div class="menu-icon">📸💖</div>
                     <div class="menu-text">Baúl</div>
-                </div> --> 
+                </div> -->
                 
-                <!-- SORPRESA FINAL BLOQUEADA HASTA EL FINAL --> 
+                <!-- SORPRESA FINAL --> 
                 <div class="menu-item locked" onclick="alert('Aún no puedes entrar aquí. ¡Tienes que pasarte los juegos primero! 🎁')">
                     <div class="menu-icon">🔒🎬</div>
                     <div class="menu-text">Sorpresa Final</div>
-                </div> 
-                <!-- SORPRESA FINAL DESBLOQUEADA SOLO QUITAR LOS COMENTARIOS PARA QUE SE ACTIVE
+
+                  <!-- SORPRESA FINAL DESBLOQUEADA SOLO QUITAR LOS COMENTARIOS PARA QUE SE ACTIVE
                 <div class="menu-item" onclick="goTo('surprise-screen')">
                     <div class="menu-icon">🔒🎬</div>
                     <div class="menu-text">Sorpresa Final</div> --> 
+                    
                 </div> 
             </div>
         </div>
@@ -135,9 +138,9 @@
             <div class="question-card" id="td-display">
                 <p>¿Qué eliges, Morrr💘?</p>
             </div>
-            <div style="display: flex; gap: 10px; width: 100%; justify-content: center; margin-bottom: 1rem;">
-                <button onclick="playTruth()" style="background: #a29bfe; color: white; border: none; width: 45%;">Verdad 😇</button>
-                <button onclick="playDare()" style="background: #ff7675; color: white; border: none; width: 45%;">Reto 😈</button>
+            <div class="td-buttons-container">
+                <button class="btn-truth" onclick="playTruth()">Verdad 😇</button>
+                <button class="btn-dare" onclick="playDare()">Reto 😈</button>
             </div>
             <button class="btn-small" onclick="goTo('menu-screen')">Volver al Menú</button>
         </div>
@@ -182,7 +185,7 @@
             <button class="btn-small" onclick="goTo('menu-screen')">Volver al Menú</button>
         </div>
 
-        <!-- PANTALLA 11: CITAS & CUPONES (200 OPCIONES) -->
+        <!-- PANTALLA 11: CITAS & CUPONES -->
         <div id="dates-screen" class="screen">
             <h2>Citas & Cupones 🎟️</h2>
             <p>Genera una cita sorpresa o canjea un cupón especial para cuando quieras...</p>
@@ -191,181 +194,65 @@
                 <p style="font-size: 1.25rem; font-weight: bold; color: var(--dark-purple);">¿Qué te apetece sacar hoy? 🤔</p>
             </div>
 
-            <div style="display: flex; gap: 10px; width: 100%; justify-content: center; margin-bottom: 1rem;">
-                <button onclick="getRandomDatePlan()" style="background: #a29bfe; color: white; border: none; width: 48%; font-size: 0.95rem;">
-                    📍 Plan de Cita
-                </button>
-                <button onclick="getRandomCoupon()" style="background: #ff7675; color: white; border: none; width: 48%; font-size: 0.95rem;">
-                    🎟️ Vale por...
-                </button>
+            <div class="td-buttons-container">
+                <button class="btn-truth" onclick="getRandomDatePlan()">📍 Plan Cita</button>
+                <button class="btn-dare" onclick="getRandomCoupon()">🎟️ Vale por...</button>
             </div>
 
             <button class="btn-small" onclick="goTo('menu-screen')">Volver al Menú</button>
         </div>
 
-
-        <!-- PANTALLA 7: JUEGO DE MEMORIA (BAÚL) -->
+        <!-- PANTALLA 7: JUEGO DE MEMORIA -->
         <div id="memory-screen" class="screen">
             <h2>Desbloquea el Baúl</h2>
             <p>Encuentra las parejas de nuestros recuerdos para ver las fotos 🧩</p>
-            <div class="memory-board" id="memory-board">
-                <!-- Las cartas se inyectan desde JS -->
-            </div>
+            <div class="memory-board" id="memory-board"></div>
             <button class="btn-small" onclick="goTo('menu-screen')">Volver al Menú</button>
         </div>
 
-        <!-- PANTALLA 8: GALERÍA (BAÚL DESBLOQUEADO) - AQUÍ ESTABA EL ERROR -->
+        <!-- PANTALLA 8: GALERÍA -->
         <div id="gallery-screen" class="screen">
             <h2>Nuestros Recuerdos 📸</h2>
             <p>Aquí están los mejores momentos de estos 5 meses...</p>
             
             <div class="gallery-container">
-                <!-- FOTO 1 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto1.jpeg" alt="Recuerdo 1" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto1'">
-                    <p>La primera foto de todas jejej</p>
-                </div>
-                <!-- FOTO 2 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto2.jpeg" alt="Recuerdo 2" onerror="this.src='https://via.placeholder.com/300x300/fecfef/6a0572?text=Falta+foto2'">
-                    <p>Cuando te di la gran camisetitaaa</p>
-                </div>
-                <!-- FOTO 3 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto3.jpeg" alt="Recuerdo 3" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto3'">
-                    <p>Aquel dia de compras...</p>
-                </div>
-                <!-- FOTO 4 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto4.jpeg" alt="Recuerdo 4" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto4'">
-                    <p>Ups esta foto creo que no era...</p>
-                </div>
-                <!-- FOTO 5 -->
-                <div class="photo-frame">  
-                    <img src="fotos/foto5.jpeg" alt="Recuerdo 5" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto5'">
-                    <p>Con tres perras...</p>
-                </div>
-                <!-- FOTO 6 -->
-                <div class="photo-frame">  
-                    <img src="fotos/foto6.jpeg" alt="Recuerdo 6" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto6'">
-                    <p>Que guapos somos</p>
-                </div>
-                <!-- FOTO 7 -->
-                <div class="photo-frame">  
-                    <img src="fotos/foto7.jpeg" alt="Recuerdo 7" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto7'">
-                    <p>Hombre si es nuestra foto mas normal, y el dia mas importante de nuestras vidas</p>
-                </div> 
-                <!-- FOTO 8 -->
-                <div class="photo-frame">  
-                    <img src="fotos/foto8.jpeg" alt="Recuerdo 8" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto8'">
-                    <p>Como te gusta morderme...</p>
-                </div>
-                <!-- FOTO 9 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto9.jpeg" alt="Recuerdo 9" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto9'">
-                    <p>El primer ramo de todos, que linda eres 😉</p>
-                </div>
-                <!-- FOTO 10 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto10.jpeg" alt="Recuerdo 10" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto10'">
-                    <p>No se si estoy mas enamorado de ti o del paisaje...</p>
-                </div>
-                <!-- FOTO 11 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto11.jpeg" alt="Recuerdo 11" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto11'">
-                    <p>Que linda con tu rosa amarilla 🌹</p>
-                </div>
-                <!-- FOTO 12 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto12.jpeg" alt="Recuerdo 12" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto12'">
-                    <p>Vaya flow tengo, o quizas tu tienes mas</p>
-                </div>
-                <!-- FOTO 13 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto13.jpeg" alt="Recuerdo 13" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto13'">
-                    <p>Cucuuuuu</p>
-                </div>
-                <!-- FOTO 14 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto14.jpeg" alt="Recuerdo 14" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto14'">
-                    <p>Que linda pareja, a que somos nosotros...</p>
-                </div>
-                <!-- FOTO 15 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto15.jpeg" alt="Recuerdo 15" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto15'">
-                    <p>En fin me encanta verte sonreir</p>
-                </div>
-                <!-- FOTO 16 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto16.jpeg" alt="Recuerdo 16" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto16'">
-                    <p>Dia de animalitosss</p>
-                </div>
-                <!-- FOTO 17 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto17.jpeg" alt="Recuerdo 17" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto17'">
-                    <p>Tan enamorada de los 🐧 y yo de ti💘</p>
-                </div>
-                <!-- FOTO 18 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto18.jpeg" alt="Recuerdo 18" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto18'">
-                    <p>Que guapa eres jejeje</p>
-                </div>
-                <!-- FOTO 19 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto19.jpeg" alt="Recuerdo 19" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto19'">
-                    <p>Que lindo me miras</p>
-                </div>
-                <!-- FOTO 20 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto20.jpeg" alt="Recuerdo 20" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto20'">
-                    <p>Pareja de puros guapos sexys ninfomanos...</p>
-                </div>
-                <!-- FOTO 21 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto21.jpeg" alt="Recuerdo 21" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto21'">
-                    <p>Hombre si te quedas dormidita encima mia jijiji</p>
-                </div>
-                <!-- FOTO 22 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto22.jpeg" alt="Recuerdo 22" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto22'">
-                    <p>ATLETIIIIIIIIIIIIIIIII❤️🤍❤️, pedazo dia...</p>
-                </div>
-                <!-- FOTO 23 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto23.jpeg" alt="Recuerdo 23" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto23'">
-                    <p>Foto megafavorita</p>
-                </div>
-                <!-- FOTO 24 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto24.jpeg" alt="Recuerdo 24" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto24'">
-                    <p>Que petit en mis brazitosss</p>
-                </div>
-                <!-- FOTO 25 -->
-                <div class="photo-frame">   
-                    <img src="fotos/foto25.jpeg" alt="Recuerdo 25" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto25'">
-                    <p>Opaaa otro ramooo, que linda mi mujerrr</p>
-                </div>
-                <!-- FOTO 26 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto26.jpeg" alt="Recuerdo 26" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto26'">
-                    <p>CUCUUUUUUUUUUUUUU</p>
-                </div>
-                <!-- FOTO 27 -->
-                <div class="photo-frame">
-                    <img src="fotos/foto27.jpeg" alt="Recuerdo 27" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto27'">
-                    <p>Que dormidita mi babyyy...</p>
-                </div>
+                <div class="photo-frame"><img src="fotos/foto1.jpeg" alt="Recuerdo 1" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto1'"><p>La primera foto de todas jejej</p></div>
+                <div class="photo-frame"><img src="fotos/foto2.jpeg" alt="Recuerdo 2" onerror="this.src='https://via.placeholder.com/300x300/fecfef/6a0572?text=Falta+foto2'"><p>Cuando te di la gran camisetitaaa</p></div>
+                <div class="photo-frame"><img src="fotos/foto3.jpeg" alt="Recuerdo 3" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto3'"><p>Aquel dia de compras...</p></div>
+                <div class="photo-frame"><img src="fotos/foto4.jpeg" alt="Recuerdo 4" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto4'"><p>Ups esta foto creo que no era...</p></div>
+                <div class="photo-frame"><img src="fotos/foto5.jpeg" alt="Recuerdo 5" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto5'"><p>Con tres perras...</p></div>
+                <div class="photo-frame"><img src="fotos/foto6.jpeg" alt="Recuerdo 6" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto6'"><p>Que guapos somos</p></div>
+                <div class="photo-frame"><img src="fotos/foto7.jpeg" alt="Recuerdo 7" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto7'"><p>Hombre si es nuestra foto mas normal, y el dia mas importante de nuestras vidas</p></div> 
+                <div class="photo-frame"><img src="fotos/foto8.jpeg" alt="Recuerdo 8" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto8'"><p>Como te gusta morderme...</p></div>
+                <div class="photo-frame"><img src="fotos/foto9.jpeg" alt="Recuerdo 9" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto9'"><p>El primer ramo de todos, que linda eres 😉</p></div>
+                <div class="photo-frame"><img src="fotos/foto10.jpeg" alt="Recuerdo 10" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto10'"><p>No se si estoy mas enamorado de ti o del paisaje...</p></div>
+                <div class="photo-frame"><img src="fotos/foto11.jpeg" alt="Recuerdo 11" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto11'"><p>Que linda con tu rosa amarilla 🌹</p></div>
+                <div class="photo-frame"><img src="fotos/foto12.jpeg" alt="Recuerdo 12" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto12'"><p>Vaya flow tengo, o quizas tu tienes mas</p></div>
+                <div class="photo-frame"><img src="fotos/foto13.jpeg" alt="Recuerdo 13" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto13'"><p>Cucuuuuu</p></div>
+                <div class="photo-frame"><img src="fotos/foto14.jpeg" alt="Recuerdo 14" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto14'"><p>Que linda pareja, a que somos nosotros...</p></div>
+                <div class="photo-frame"><img src="fotos/foto15.jpeg" alt="Recuerdo 15" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto15'"><p>En fin me encanta verte sonreir</p></div>
+                <div class="photo-frame"><img src="fotos/foto16.jpeg" alt="Recuerdo 16" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto16'"><p>Dia de animalitosss</p></div>
+                <div class="photo-frame"><img src="fotos/foto17.jpeg" alt="Recuerdo 17" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto17'"><p>Tan enamorada de los 🐧 y yo de ti💘</p></div>
+                <div class="photo-frame"><img src="fotos/foto18.jpeg" alt="Recuerdo 18" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto18'"><p>Que guapa eres jejeje</p></div>
+                <div class="photo-frame"><img src="fotos/foto19.jpeg" alt="Recuerdo 19" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto19'"><p>Que lindo me miras</p></div>
+                <div class="photo-frame"><img src="fotos/foto20.jpeg" alt="Recuerdo 20" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto20'"><p>Pareja de puros guapos sexys ninfomanos...</p></div>
+                <div class="photo-frame"><img src="fotos/foto21.jpeg" alt="Recuerdo 21" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto21'"><p>Hombre si te quedas dormidita encima mia jijiji</p></div>
+                <div class="photo-frame"><img src="fotos/foto22.jpeg" alt="Recuerdo 22" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto22'"><p>ATLETIIIIIIIIIIIIIIIII❤️🤍❤️, pedazo dia...</p></div>
+                <div class="photo-frame"><img src="fotos/foto23.jpeg" alt="Recuerdo 23" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto23'"><p>Foto megafavorita</p></div>
+                <div class="photo-frame"><img src="fotos/foto24.jpeg" alt="Recuerdo 24" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto24'"><p>Que petit en mis brazitosss</p></div>
+                <div class="photo-frame"><img src="fotos/foto25.jpeg" alt="Recuerdo 25" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto25'"><p>Opaaa otro ramooo, que linda mi mujerrr</p></div>
+                <div class="photo-frame"><img src="fotos/foto26.jpeg" alt="Recuerdo 26" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto26'"><p>CUCUUUUUUUUUUUUUU</p></div>
+                <div class="photo-frame"><img src="fotos/foto27.jpeg" alt="Recuerdo 27" onerror="this.src='https://via.placeholder.com/300x300/ff9a9e/ffffff?text=Falta+foto27'"><p>Que dormidita mi babyyy...</p></div>
             </div>
             
             <button class="btn-small" onclick="goTo('menu-screen')">Volver al Menú</button>
-        </div> <!-- FIN DE GALERÍA -->
+        </div>
 
-    <!-- PANTALLA 9: SORPRESA FINAL (CÓDIGO SECRETO Y VÍDEO) -->
+        <!-- PANTALLA 9: SORPRESA FINAL -->
         <div id="surprise-screen" class="screen">
             <h2>Sorpresa Final 🎬</h2>
             
             <div id="lock-container" class="question-card" style="text-align: center;">
-                <!-- Cambiamos la pregunta para que dé la pista de los 4 meses -->
                 <p>Para ver el vídeo secreto, introduce cuántos meses llevamos juntos volviéndonos locos (número):</p>
                 <input type="text" id="secret-code-input" style="width: 100%; padding: 10px; border-radius: 15px; border: 2px solid #fff; background: rgba(255,255,255,0.7); text-align: center; font-size: 1.1rem; margin-bottom: 1rem; outline: none;">
                 
@@ -388,9 +275,8 @@
             <button class="btn-small" onclick="goTo('menu-screen')">Volver al Menú</button>
         </div>    
 
-    </div> <!-- FIN DE APP -->
+    </div>
 
-    <!-- Enlace a tu archivo JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
