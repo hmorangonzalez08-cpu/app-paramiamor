@@ -53,8 +53,8 @@ function toggleMusic() {
     isMusicPlaying = !isMusicPlaying;
 }
 
-// --- CONTADOR DE TIEMPO (FECHA: 7 DE SEPTIEMBRE DE 2026) ---
-const startDate = new Date(2026, 8, 7, 0, 0, 0);
+// --- CONTADOR DE TIEMPO (FECHA: 7 DE JULIO DE 2026) ---
+const startDate = new Date(2026, 6, 7, 1, 0, 0);
 
 function updateLoveCounter() {
     const now = new Date();
