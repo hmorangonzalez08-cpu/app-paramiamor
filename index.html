@@ -11,8 +11,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- CONTENEDOR DE CONFETI DE CORAZONES -->
+    <div id="confetti-container"></div>
 
     <div id="app">
+         <!-- REPRODUCTOR FLOTANTE DE MÚSICA -->
+        <audio id="bg-music" loop>
+            <source src="cancion.mp3" type="audio/mpeg">
+        </audio>
+        <div id="music-btn" class="music-floating" onclick="toggleMusic()">
+            <span id="music-icon">🔇</span>
+        </div>
+
         <!-- PANTALLA 1: BIENVENIDA (NIVEL DIOS) -->
         <div id="welcome-screen" class="screen active">
             <!-- Lluvia de corazones decorativos de fondo -->
@@ -23,7 +33,7 @@
             <div class="welcome-card-epic">
                 <div class="heart-glow-icon">💖</div>
                 <h1>Para Morrr💘</h1>
-                <p class="epic-subtitle">Cinco meses maravillosos...</p>
+                <p class="epic-subtitle">Muchos momentos maravillosos...</p>
                 <p class="epic-text">He programado este pequeño universo secreto solo para ti. Demuestra cuánto nos conocemos y descubre lo que tengo guardado.</p>
                 
                 <button class="btn-epic" onclick="goTo('menu-screen')">
@@ -35,6 +45,13 @@
         <!-- PANTALLA 2: MENÚ PRINCIPAL -->
         <div id="menu-screen" class="screen">
             <h2>Nuestro Rincón</h2>
+
+            <!-- CONTADOR DE TIEMPO JUNTOS -->
+            <div class="time-counter-card">
+                <p class="counter-title">Llevamos volviéndonos locos... 💘</p>
+                <div id="love-counter">Cargando nuestro tiempo...</div>
+            </div
+
             <p>¿Qué te atreves a hacer primero?</p>
             
             <div class="menu-grid">
@@ -57,29 +74,40 @@
                     <div class="menu-icon">💌✍️</div>
                     <div class="menu-text">Carta Secreta</div>
                 </div>
+
+                <div class="menu-item" onclick="goTo('reasons-screen')">
+                    <div class="menu-icon">💖📜</div>
+                    <div class="menu-text">100 Razones</div>
+                </div>
                 
-                <!-- BOTÓN DEL BAÚL (Sin Activar) 
+                <!-- 6ª APP: CITAS & CUPONES -->
+                <div class="menu-item" onclick="goTo('dates-screen')">
+                    <div class="menu-icon">🎟️✨</div>
+                    <div class="menu-text">Citas & Cupones</div>
+                </div>
+
+                <!-- BOTÓN DEL BAÚL (Sin Activar) -->
                  <div class="menu-item locked" onclick="alert('Aún no puedes entrar aquí atrevida. ¡Primero juega un poquito a todos los juegos! 🎁')">
                     <div class="menu-icon">📸💖</div>
                     <div class="menu-text">Baúl</div>
-                </div> -->
+                </div> 
 
-                <!--SOPPRESA BAÚL SOLO QUITAR LO COMENTADO Y COMENTAR DEL TODO LA OTRA PARTE PARA QUE SE DESBLOQUEEE -->
+                <!--SOPPRESA BAÚL SOLO QUITAR LO COMENTADO Y COMENTAR DEL TODO LA OTRA PARTE PARA QUE SE DESBLOQUEEE 
                 <div class="menu-item" onclick="goTo('memory-screen')">
                     <div class="menu-icon">📸💖</div>
                     <div class="menu-text">Baúl</div>
-                </div>
+                </div> --> 
                 
-                <!-- SORPRESA FINAL BLOQUEADA HASTA EL FINAL 
+                <!-- SORPRESA FINAL BLOQUEADA HASTA EL FINAL -->
                 <div class="menu-item locked" onclick="alert('Aún no puedes entrar aquí. ¡Tienes que pasarte los juegos primero! 🎁')">
                     <div class="menu-icon">🔒🎬</div>
                     <div class="menu-text">Sorpresa Final</div>
-                </div> -->
-                <!-- SORPRESA FINAL DESBLOQUEADA SOLO QUITAR LOS COMENTARIOS PARA QUE SE ACTIVE -->
+                </div>
+                <!-- SORPRESA FINAL DESBLOQUEADA SOLO QUITAR LOS COMENTARIOS PARA QUE SE ACTIVE 
                 <div class="menu-item" onclick="goTo('surprise-screen')">
                     <div class="menu-icon">🔒🎬</div>
                     <div class="menu-text">Sorpresa Final</div>
-                </div> 
+                </div> --> 
             </div>
         </div>
 
@@ -138,6 +166,43 @@
             </div>
             <button class="btn-small" onclick="goTo('menu-screen')">Volver al Menú</button>
         </div>
+
+        <!-- PANTALLA 10: 100 RAZONES POR LAS QUE TE AMO -->
+        <div id="reasons-screen" class="screen">
+            <h2>Por qué te amo 💘</h2>
+            <p>Descubre una de las 100 razones por las que me tienes loco...</p>
+            
+            <div class="question-card" id="reason-display">
+                <p style="font-size: 1.3rem; font-weight: bold; color: var(--dark-purple);">Pulsa el botón para revelar una razón ✨</p>
+            </div>
+
+            <button onclick="getRandomReason()" style="background: linear-gradient(135deg, #a29bfe, #ff7675); color: white; border: none;">
+                ¿Otra razón más? 💘 
+            </button>
+            <button class="btn-small" onclick="goTo('menu-screen')">Volver al Menú</button>
+        </div>
+
+        <!-- PANTALLA 11: CITAS & CUPONES (200 OPCIONES) -->
+        <div id="dates-screen" class="screen">
+            <h2>Citas & Cupones 🎟️</h2>
+            <p>Genera una cita sorpresa o canjea un cupón especial para cuando quieras...</p>
+            
+            <div class="question-card" id="date-coupon-display">
+                <p style="font-size: 1.25rem; font-weight: bold; color: var(--dark-purple);">¿Qué te apetece sacar hoy? 🤔</p>
+            </div>
+
+            <div style="display: flex; gap: 10px; width: 100%; justify-content: center; margin-bottom: 1rem;">
+                <button onclick="getRandomDatePlan()" style="background: #a29bfe; color: white; border: none; width: 48%; font-size: 0.95rem;">
+                    📍 Plan de Cita
+                </button>
+                <button onclick="getRandomCoupon()" style="background: #ff7675; color: white; border: none; width: 48%; font-size: 0.95rem;">
+                    🎟️ Vale por...
+                </button>
+            </div>
+
+            <button class="btn-small" onclick="goTo('menu-screen')">Volver al Menú</button>
+        </div>
+
 
         <!-- PANTALLA 7: JUEGO DE MEMORIA (BAÚL) -->
         <div id="memory-screen" class="screen">
@@ -299,29 +364,25 @@
         <div id="surprise-screen" class="screen">
             <h2>Sorpresa Final 🎬</h2>
             
-            <!-- Fase 1: El reto del código -->
             <div id="lock-container" class="question-card" style="text-align: center;">
-                <p>Para abrir el último candado y ver el vídeo secreto, responde:</p>
-                <p style="font-weight: bold; color: var(--dark-purple);">¿Cuántos meses llevamos juntos volviéndome loco de amor?</p>
-                
-                <input type="text" id="secret-code-input" placeholder="Escribe tu respuesta..." style="width: 100%; padding: 10px; border-radius: 15px; border: 2px solid #fff; background: rgba(255,255,255,0.7); text-align: center; font-size: 1.1rem; margin-bottom: 1rem; font-family: 'Nunito', sans-serif; outline: none;">
+                <!-- Cambiamos la pregunta para que dé la pista de los 4 meses -->
+                <p>Para ver el vídeo secreto, introduce cuántos meses llevamos juntos volviéndonos locos (número):</p>
+                <input type="text" id="secret-code-input" style="width: 100%; padding: 10px; border-radius: 15px; border: 2px solid #fff; background: rgba(255,255,255,0.7); text-align: center; font-size: 1.1rem; margin-bottom: 1rem; outline: none;">
                 
                 <button onclick="checkSecretCode()">Desbloquear vídeo 🔓</button>
             </div>
 
-            <!-- Fase 2: El vídeo desbloqueado (Oculto al principio) -->
             <div id="video-reveal-container" style="display: none; width: 100%; text-align: center;">
                 <p style="font-size: 1.2rem; font-weight: bold; color: var(--dark-purple);">¡Lo has conseguido todo, mi amor! 🎉</p>
-                <p>Has llegado hasta el final. Ahora prepárate y dale al play para ver esto juntos...</p>
+                <p>Has llegado al final. Dale al play para ver nuestro vídeo juntos...</p>
                 
-                <!-- Enlace directo a tu vídeo de YouTube -->
-                <a href="AQUÍ_PEGAS_EL_ENLACE_DE_TÚ_YOUTUBE" target="_blank" style="text-decoration: none;">
+                <a id="youtube-link" href="https://www.youtube.com" target="_blank" style="text-decoration: none;">
                     <button style="background: #ff4757; color: white; font-size: 1.2rem; padding: 15px; border: none; margin-top: 1rem;">
                         ▶️ Ver nuestro vídeo especial
                     </button>
                 </a>
                 
-                <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">(Y ahora... la pregunta más importante de mi vida. 💍❤️)</p>
+                <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">(Y ahora mírame... ❤️)</p>
             </div>
             
             <button class="btn-small" onclick="goTo('menu-screen')">Volver al Menú</button>
