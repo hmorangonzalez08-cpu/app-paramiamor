@@ -20,6 +20,7 @@ function toggleNightMode() {
 // --- CONFETI DE CORAZONES ---
 function launchConfetti() {
     const container = document.getElementById("confetti-container");
+    if (!container) return;
     const hearts = ["💖", "💜", "✨", "🌸", "💘"];
     
     for (let i = 0; i < 30; i++) {
@@ -53,7 +54,7 @@ function toggleMusic() {
     isMusicPlaying = !isMusicPlaying;
 }
 
-// --- CONTADOR DE TIEMPO (SOLO MESES Y DÍAS) ---
+// --- CONTADOR DE TIEMPO (JULIO 2026) ---
 const startDate = new Date("2026-07-07T00:00:00");
 
 function updateLoveCounter() {
@@ -67,7 +68,6 @@ function updateLoveCounter() {
         return;
     }
 
-    // Cálculo exacto de meses
     let months = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth());
     let pastDate = new Date(startDate);
     pastDate.setMonth(pastDate.getMonth() + months);
@@ -78,7 +78,6 @@ function updateLoveCounter() {
         pastDate.setMonth(pastDate.getMonth() + months);
     }
 
-    // Diferencia exacta de días
     const diff = now - pastDate;
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
 
