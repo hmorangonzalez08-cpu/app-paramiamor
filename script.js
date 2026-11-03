@@ -53,28 +53,36 @@ function toggleMusic() {
     isMusicPlaying = !isMusicPlaying;
 }
 
-// --- CONTADOR DE TIEMPO (FECHA: 7 DE JULIO DE 2026) ---
-const startDate = new Date(2026, 6, 7, 1, 0, 0);
+// --- CONTADOR DE TIEMPO (SOLO MESES Y DÍAS) ---
+const startDate = new Date("2026-07-07T00:00:00");
 
 function updateLoveCounter() {
-    const now = new Date();
-    const diff = now - startDate;
+    const counterElement = document.getElementById("love-counter");
+    if (!counterElement) return;
 
-    if (diff < 0) {
-        document.getElementById("love-counter").innerText = "¡Empezamos hoy! ❤️";
+    const now = new Date();
+    
+    if (now < startDate) {
+        counterElement.innerText = "¡Nuestra historia empieza hoy! ❤️";
         return;
     }
 
-    const daysTotal = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const months = Math.floor(daysTotal / 30.44);
-    const days = Math.floor(daysTotal % 30.44);
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    // Cálculo exacto de meses
+    let months = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth());
+    let pastDate = new Date(startDate);
+    pastDate.setMonth(pastDate.getMonth() + months);
 
-    const counterElement = document.getElementById("love-counter");
-    if (counterElement) {
-        counterElement.innerText = `${months} meses, ${days} días, ${hours}h y ${minutes}m ✨`;
+    if (now < pastDate) {
+        months--;
+        pastDate = new Date(startDate);
+        pastDate.setMonth(pastDate.getMonth() + months);
     }
+
+    // Diferencia exacta de días
+    const diff = now - pastDate;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    counterElement.innerText = `${months} meses y ${days} días ✨`;
 }
 
 // --- 100 RAZONES POR LAS QUE TE AMO ---
