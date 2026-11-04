@@ -445,7 +445,7 @@ const questions = [
     { question: "¿Nuestro plan favorito para un domingo perezoso?", options: ["Quedarnos en la cama todo el día viendo pelis", "Salir a tomar chocolate", "Hacer maratón de juegos", "Dormir acurrucados"], answer: 0 },
     { question: "¿Quién cae rendido y se duerme antes viendo una serie?", options: ["Tú, te duermes enseguida", "Yo, que caigo frito", "Los dos a la vez", "Ninguno"], answer: 0 },
     { question: "¿Qué es lo que más te repito sobre lo guapa que eres?", options: ["Que eres perfecta para mí", "Que no pienses mal de tu físico", "Que me tienes loco", "Todas son ciertas"], answer: 3 },
-    { question: "¿Qué fecha tan señalada estamos a punto de celebrar?", options: ["El 7 de noviembre", "Nuestro aniversario exacto", "El día que nos conocimos", "Nuestra primera escapada"], answer: 0 }
+    { question: "¿Qué fecha tan señalada estamos a punto de celebrar?", options: ["El 4 de noviembre", "Nuestro aniversario exacto", "El día que nos conocimos", "Nuestra primera escapada"], answer: 0 }
 ];
 let currentQuestion = 0;
 
